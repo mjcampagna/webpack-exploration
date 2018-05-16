@@ -293,12 +293,13 @@ html {
 }
 
 body {
-  margin: 0;
   height: 100%;
+  margin: 0;
+  padding: 36px 48px;
 }
 ````
 
-Finally, because Webpack can have only a single entry point, we must reference our new CSS file within `index.js`. Weird, right? At the very top:
+Finally, because Webpack can have only a single entry point, and that's our `index.js` file, we must reference our new CSS file within it. At the very top:
 
 **src/index.js**
 ````js
