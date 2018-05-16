@@ -86,12 +86,12 @@ To get Webpack doing more of the things we want, we should employ a configuratio
 const path = require('path');
 
 module.exports = {
-	mode: 'production',
+  mode: 'production',
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'main.js'
-	},
+  },
 };
 ````
 
@@ -109,27 +109,27 @@ To use these, we'll need to grow our configuration file to include modules.
 const path = require('path');
 
 module.exports = {
-	mode: 'production',
+  mode: 'production',
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'main.js'
-	},
-	
-	module: {
-		rules: [
+  },
+  
+  module: {
+    rules: [
 
-			{ 
-				test: /\.jsx?$/, 
-				loader: 'babel-loader',
-				include: /src/,
-				options: {
-					presets: ['env']
-				}
-			},
+      { 
+        test: /\.jsx?$/, 
+        loader: 'babel-loader',
+        include: /src/,
+        options: {
+          presets: ['env']
+        }
+      },
 
-		]//rules
-	}//module
+    ]//rules
+  }//module
 };
 
 Optionally, we might include React transpiling. In that case:
@@ -139,20 +139,20 @@ Optionally, we might include React transpiling. In that case:
 And we add the React preset to our rules:
 
 ````
-	module: {
-		rules: [
+  module: {
+    rules: [
 
-			{ 
-				test: /\.jsx?$/, 
-				loader: 'babel-loader',
-				include: /src/,
-				options: {
-					presets: ['env', 'react']
-				}
-			},
+      { 
+        test: /\.jsx?$/, 
+        loader: 'babel-loader',
+        include: /src/,
+        options: {
+          presets: ['env', 'react']
+        }
+      },
 
-		]//rules
-	}//module
+    ]//rules
+  }//module
 ````
 
 ----
