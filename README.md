@@ -4,6 +4,8 @@ Through Webpack lies the path to madness. This I have gathered, reading various 
 
 Rather than follow those crumbs, I have decided to cut my own path. My hope is to create a base Webpack configuration, simple and straight-forward, hewing as closely as I can to those modules and plugins maintained by the Webpack Team themselves. In this way, I hope to minimize the wonkiness and hackiness that many articles seem to encourage in their configurations.
 
+----
+
 ### Sources
 
 Webpack - A Detailed Introduction, by Joseph Zimmerman
