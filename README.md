@@ -360,6 +360,14 @@ Running the build, you will now find a `style.css` file in your `dist` folder!
 
 ----
 
+## What's Next?!
+
+SASS, perhaps. Minification. Assets handling?
+
+This document is still evolving, so I'll add to it as needed.
+
+----
+
 ### Sources
 
 [Webpack Documentation](https://webpack.js.org/concepts/)
