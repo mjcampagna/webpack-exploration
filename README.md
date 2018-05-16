@@ -61,7 +61,7 @@ Open the `package.json` file, and edit the "scripts" section to match the follow
 
 **package.json**
 ````
-...
+...js
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "prebuild": "del-cli dist -f",
@@ -82,7 +82,7 @@ Go on, try it.
 
 To get Webpack doing more of the things we want, we should employ a configuration file. In the project root, create a new file, `webpack.config.js`, with these contents:
 
-````
+````js
 const path = require('path');
 
 module.exports = {
@@ -105,7 +105,7 @@ Install the following with npm.
 
 To use these, we'll need to grow our configuration file to include modules.
 
-````
+````js
 const path = require('path');
 
 module.exports = {
@@ -139,7 +139,7 @@ The regular expression used above, `/.jsx?$/`, will match both `.js` and `.jsx`,
 
 And we add the React preset to our rules:
 
-````
+````js
   module: {
     rules: [
 
@@ -171,36 +171,36 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
 module.exports = {
-	mode: 'production',
+  mode: 'production',
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'main.js'
-	},
-	
-	module: {
-		rules: [
+  },
+  
+  module: {
+    rules: [
 
-			{ 
-				test: /\.jsx?$/, 
-				loader: 'babel-loader',
-				include: /src/,
-				options: {
-					presets: ['env', 'react']
-				}
-			},
+      { 
+        test: /\.jsx?$/, 
+        loader: 'babel-loader',
+        include: /src/,
+        options: {
+          presets: ['env', 'react']
+        }
+      },
 
-		]//rules
-	},//module
+    ]//rules
+  },//module
 
-	plugins: [
+  plugins: [
 
-		new HtmlWebpackPlugin({
+    new HtmlWebpackPlugin({
       title: 'My App Title',
-			template: 'src/index.html'
-		})
+      template: 'src/index.html'
+    })
 
-	]//plugins
+  ]//plugins
 
 };
 ````
