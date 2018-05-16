@@ -133,7 +133,7 @@ module.exports = {
 };
 ````
 
-Optionally, we might include React transpiling. In that case:
+The regular expression used above, `/.jsx?$/`, will match both `.js` and `.jsx`, just in case you want to use React in your app. Speaking of, we might include React transpiling:
 
 ````npm install babel-preset-react --save-dev````
 
@@ -154,6 +154,77 @@ And we add the React preset to our rules:
 
     ]//rules
   }//module
+````
+
+----
+
+## It's HTML Time!
+
+Now let's get our HTML on. For this, we need the `HTML Webpack Plugin`. In keeping with our mission statement, this is maintained by the Webpack Team.
+
+````$ npm install html-webpack-plugin --save-dev````
+
+In our configuration file, we must **require** it, and add the `plugins` configuration.
+
+````js
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
+
+module.exports = {
+	mode: 'production',
+  entry: './src/index.js',
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'main.js'
+	},
+	
+	module: {
+		rules: [
+
+			{ 
+				test: /\.jsx?$/, 
+				loader: 'babel-loader',
+				include: /src/,
+				options: {
+					presets: ['env', 'react']
+				}
+			},
+
+		]//rules
+	},//module
+
+	plugins: [
+
+		new HtmlWebpackPlugin({
+      title: 'My App Title',
+			template: 'src/index.html'
+		})
+
+	]//plugins
+
+};
+````
+
+Now let's revist the empty `index.html` file we created at the top of the article. Open it up, and paste in the following:
+
+````html
+<!doctype html>
+<html dir="ltr" lang="en">
+  <head>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <title><%= htmlWebpackPlugin.options.title %></title>
+
+    <meta name="description" content="" />
+
+  </head>
+  <body>
+
+  </body>
+</html>
 ````
 
 ----
