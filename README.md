@@ -14,6 +14,29 @@ Initialize the project folder with:
 
 It's okay to accept the defaults, and you will end up with a `package.json` ready to work with.
 
+Install Webpack and its command-line interface as development dependencies with:
+
+````$ npm install webpack webpack-cli --save-dev````
+
+Within the project folder, create a `src` folder, containing two files, `index.html` and `index.js`. At this point, your folder should look like this:
+
+````
+node_modules
+src
+  -- index.html
+	-- index.js
+package-lock.json
+package.json
+````
+
+Create a `.gitignore` file, and let's ignore both `node_modules` and `dist`, a folder which will be created later.
+
+**.gitignore**
+````
+dist/
+node_modules/
+````
+
 ----
 
 ### Sources
