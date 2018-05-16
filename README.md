@@ -10,7 +10,7 @@ This article assumes some familiarity with [Node.js](https://nodejs.org/) and np
 
 ## Wait. Why ... ?
 
-You might be wondering, do we need another Webpack article? Maybe you don't, but I do. Most articles I've found online are out-of-date, completely insane, or both. They steer the reader into brambles, then hand them band-aids to cover the wounds, in the form of third-party loaders and plugins that seem less like feature adds, and more like hacks.
+You might be wondering, do we need another Webpack article? Maybe you don't, but I do. Most articles I've found online are out-of-date, completely insane, or both. They steer the reader into brambles, then hand them band-aids to cover the wounds, usually in the form of third-party loaders and plugins that seem less like feature adds, and more like hacks.
 
 This is a living document that I can update as Webpack and/or my needs continue to evolve, and I hope to avoid bloating my `package.json` or Webpack config with anything nonessential.
 
@@ -370,13 +370,13 @@ This document is still evolving, so I'll add to it as needed.
 
 ### Sources
 
-[Webpack Documentation](https://webpack.js.org/concepts/)
+[Webpack Documentation](https://webpack.js.org/concepts/) (essential)
 
-[mini-css-extract-plugin on Github](https://github.com/webpack-contrib/mini-css-extract-plugin)
+[mini-css-extract-plugin on Github](https://github.com/webpack-contrib/mini-css-extract-plugin) (useful)
 
-[Webpack - A Detailed Introduction](https://www.smashingmagazine.com/2017/02/a-detailed-introduction-to-webpack/), by Joseph Zimmerman
+[Webpack - A Detailed Introduction](https://www.smashingmagazine.com/2017/02/a-detailed-introduction-to-webpack/), by Joseph Zimmerman (out-of-date)
 
 
-[A tale of Webpack 4 and how to finally configure it in the right way](https://hackernoon.com/a-tale-of-webpack-4-and-how-to-finally-configure-it-in-the-right-way-4e94c8e7e5c1), by Margarita Obraztsova
+[A tale of Webpack 4 and how to finally configure it in the right way](https://hackernoon.com/a-tale-of-webpack-4-and-how-to-finally-configure-it-in-the-right-way-4e94c8e7e5c1), by Margarita Obraztsova (an informative mess)
 
 ----
