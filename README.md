@@ -12,7 +12,7 @@ Initialize the project folder with:
 
 ````$ npm init````
 
-
+It's okay to accept the defaults, and you will end up with a `package.json` ready to work with.
 
 ----
 
