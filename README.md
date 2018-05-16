@@ -8,8 +8,9 @@ Rather than follow those crumbs, I have decided to cut my own path. My hope is t
 
 ### Sources
 
-Webpack - A Detailed Introduction, by Joseph Zimmerman
-https://www.smashingmagazine.com/2017/02/a-detailed-introduction-to-webpack/
+[Webpack - A Detailed Introduction](https://www.smashingmagazine.com/2017/02/a-detailed-introduction-to-webpack/), by Joseph Zimmerman
 
-A tale of Webpack 4 and how to finally configure it in the right way, by Margarita Obraztsova
-https://hackernoon.com/a-tale-of-webpack-4-and-how-to-finally-configure-it-in-the-right-way-4e94c8e7e5c1
+
+[A tale of Webpack 4 and how to finally configure it in the right way](https://hackernoon.com/a-tale-of-webpack-4-and-how-to-finally-configure-it-in-the-right-way-4e94c8e7e5c1), by Margarita Obraztsova
+
+----
