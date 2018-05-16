@@ -55,7 +55,7 @@ By default, Webpack will create the `dist` folder when it runs, and dump its out
 $ npm install del-cli --save-dev
 ````
 
-This allows the deletion of files and directories, and is useful in build scripts.
+This allows the deletion of files and directories, and is useful in build scripts. `del-cli` is fully separate from Webpack, so we can use it without cluttering the configuration file that we'll be building shortly.
 
 Open the `package.json` file, and edit the "scripts" section to match the following.
 
@@ -74,13 +74,15 @@ The `prebuild` will remove an existing `dist` folder, `webpack` will recreate it
 
 ````npm run build````
 
-Go on, try it.
+Go on, try it. =D
 
 ----
 
-## Launching a Configuration File
+## Creating the Configuration File
 
-To get Webpack doing more of the things we want, we should employ a configuration file. In the project root, create a new file, `webpack.config.js`, with these contents:
+To get Webpack doing more of the things we want, we should employ a configuration file. We might think about the configuration file as our map, a record of where we've been, and a guide for where we next expect to go.
+
+ In the project root, create a new file, `webpack.config.js`, with these contents:
 
 **webpack.config.js**
 ````js
@@ -96,9 +98,9 @@ module.exports = {
 };
 ````
 
-This essentially mimics Webpack's default behavior, and we will begin to expand on it. For details on what's here, see Webpack documentation for [Entry](https://webpack.js.org/concepts/#entry), [Output](https://webpack.js.org/concepts/#output) and [Mode](https://webpack.js.org/concepts/#mode). These are core concepts you'll want to understand.
+As written, this essentially mimics Webpack's default behavior. We'll sketch in more of the terrain as we travel forward. For details on what's here, see Webpack documentation for [Entry](https://webpack.js.org/concepts/#entry), [Output](https://webpack.js.org/concepts/#output) and [Mode](https://webpack.js.org/concepts/#mode). These are core concepts you'll want to understand.
 
-Because it's 2018 and the JS is all the rage, you probably want to include Babel for the fogey browsers.
+Because it's 2018 and the newer ECMAScript is all the rage, you probably want to include Babel, helpful for teaching the new slang to fogey browsers.
 
 Install the following with npm.
 
@@ -135,7 +137,7 @@ module.exports = {
 };
 ````
 
-The regular expression used above, `/.jsx?$/`, will match both `.js` and `.jsx`, just in case you want to use React in your app. Speaking of, we might include React transpiling:
+The regular expression used above, `/.jsx?$/`, will match both `.js` and `.jsx`, just in case you want to use React in your app. Speaking of, we might include React transpiling; skip this next step if you don't need it.
 
 ````npm install babel-preset-react --save-dev````
 
@@ -234,7 +236,7 @@ Now let's revist the empty `index.html` file we created at the top of the articl
 
 Note the strange enclosure in the HTML `<title>` element. This allows us to dynamically pull the app's name from the HtmlWebpackPlugin `title` option in our Webpack configuration file.
 
-It's also worth nothing that our HTML template does not explicitly include the script file. Don't worry! Webpack will add the script inclusions before closing the `body` element.
+It's also worth nothing that our HTML template does not explicitly include the script file. Don't worry! Webpack will add the script inclusions before the `body` element closes.
 
 And finally, we are including a `link` element referencing a stylesheet that does not yet exist. That's next.
 
@@ -242,11 +244,11 @@ And finally, we are including a `link` element referencing a stylesheet that doe
 
 ## The CSS!
 
-CSS in Webpack is weird. Let's just get that out of the way before we dive in.
+To here, the road we have cut has been fairly direct. As we get into CSS, though, I must warn you that I've found the terrain somewhat swampy.
 
-We'll begin with Webpack's `css-loader` and `style-loader`. Install them with:
+Webpack's documentation recommends pairing `css-loader` and `style-loader`. Install them with:
 
-````$ npm install css-loader style-loader --save-dev````
+````$ npm install style-loader css-loader --save-dev````
 
 Then update the rules in our module config.
 
@@ -273,12 +275,26 @@ Then update the rules in our module config.
   },//module
 ````
 
+As Webpack invokes loaders from right-to-left, the sequence above -- 'style-loader', 'css-loader' -- is important. Don't swap them.
+
 Create a `style.css` file in your `src` folder, and put something -- anything! -- inside of it. Here's something:
 
 **src/style.css**
 ````css
+html {
+  background: #ffffff;
+  color: #333333;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 16px;
+  height: 100%;
+  text-rendering: optimizelegibility;
+  -ms-touch-action: manipulation;
+      touch-action: manipulation;
+}
+
 body {
-  background-color: rgba(255,0,0,0.15);
+  margin: 0;
+  height: 100%;
 }
 ````
 
@@ -289,7 +305,7 @@ Finally, because Webpack can have only a single entry point, we must reference o
 import css from './style.css';
 ````
 
-Run your build, and your CSS should appear in the compiled `main.js` file. It works, but it's also lame. Because putting CSS into your JavaScript files is lame. LAME.
+Run your build, and your CSS should appear in the compiled `main.js` file. It works, but it's also lame. Because putting CSS into your JavaScript files is lame. toUpperCase(). LAME.
 
 To combat lameness, here we break from our first-party mission statement, and reach for a third-party solution. That solution is `mini-css-extract-plugin`.
 
@@ -375,6 +391,6 @@ This document is still evolving, so I'll add to it as needed.
 [Webpack - A Detailed Introduction](https://www.smashingmagazine.com/2017/02/a-detailed-introduction-to-webpack/), by Joseph Zimmerman (out-of-date)
 
 
-[A tale of Webpack 4 and how to finally configure it in the right way](https://hackernoon.com/a-tale-of-webpack-4-and-how-to-finally-configure-it-in-the-right-way-4e94c8e7e5c1), by Margarita Obraztsova (an informative mess)
+[A tale of Webpack 4 and how to finally configure it in the right way](https://hackernoon.com/a-tale-of-webpack-4-and-how-to-finally-configure-it-in-the-right-way-4e94c8e7e5c1), by Margarita Obraztsova (informative, but a mess)
 
 ----
