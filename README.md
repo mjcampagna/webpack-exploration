@@ -82,6 +82,7 @@ Go on, try it.
 
 To get Webpack doing more of the things we want, we should employ a configuration file. In the project root, create a new file, `webpack.config.js`, with these contents:
 
+**webpack.config.js**
 ````js
 const path = require('path');
 
@@ -105,6 +106,7 @@ Install the following with npm.
 
 To use these, we'll need to grow our configuration file to include modules.
 
+**webpack.config.js**
 ````js
 const path = require('path');
 
@@ -139,6 +141,7 @@ The regular expression used above, `/.jsx?$/`, will match both `.js` and `.jsx`,
 
 And we add the React preset to our rules:
 
+**webpack.config.js**
 ````js
   module: {
     rules: [
@@ -166,8 +169,9 @@ Now let's get our HTML on. For this, we need the `HTML Webpack Plugin`. In keepi
 
 In our configuration file, we must **require** it, and add the `plugins` configuration.
 
+**webpack.config.js**
 ````js
-var HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
 module.exports = {
@@ -207,6 +211,7 @@ module.exports = {
 
 Now let's revist the empty `index.html` file we created at the top of the article. Open it up, and paste in the following:
 
+**src/index.html**
 ````html
 <!doctype html>
 <html dir="ltr" lang="en">
@@ -218,7 +223,7 @@ Now let's revist the empty `index.html` file we created at the top of the articl
 
     <title><%= htmlWebpackPlugin.options.title %></title>
 
-    <meta name="description" content="" />
+    <link rel="stylesheet" href="style.css" />
 
   </head>
   <body>
@@ -231,9 +236,135 @@ Note the strange enclosure in the HTML `<title>` element. This allows us to dyna
 
 It's also worth nothing that our HTML template does not explicitly include the script file. Don't worry! Webpack will add the script inclusions before closing the `body` element.
 
+And finally, we are including a `link` element referencing a stylesheet that does not yet exist. That's next.
+
+----
+
+## The CSS!
+
+CSS in Webpack is weird. Let's just get that out of the way before we dive in.
+
+We'll begin with Webpack's `css-loader` and `style-loader`. Install them with:
+
+````$ npm install css-loader style-loader --save-dev````
+
+Then update the rules in our module config.
+
+**webpack.config.js**
+````js
+	module: {
+		rules: [
+
+			{ 
+				test: /\.jsx?$/, 
+				loader: 'babel-loader',
+				include: /src/,
+				options: {
+					presets: ['env', 'react']
+				}
+			},
+
+			{
+				test: /\.css$/,
+				use: ['style-loader', 'css-loader']
+      }
+
+		]//rules
+	},//module
+````
+
+Create a `style.css` file in your `src` folder, and put something -- anything! -- inside of it. Here's something:
+
+**src/style.css**
+````css
+body {
+  background-color: rgba(255,0,0,0.15);
+}
+````
+
+Finally, because Webpack can have only a single entry point, we much reference our new CSS file within `index.js`. Weird, right?
+
+At the very top:
+
+**src/index.js**
+````js
+import css from './style.css';
+````
+
+Run your build, and your CSS should appear in the compiled `main.js` file. It works, but it's also lame. Because putting CSS into your JS is lame. LAME.
+
+To combat lameness, here we break from our first-party mission statement, and reach for a third-party solution. That solution is `mini-css-extract-plugin`.
+
+````$ npm install mini-css-extract-plugin --save-dev````
+
+In reading elsewhere, you may find references toward using `extract-text-webpack-plugin`, but visiting that module's Github page, you will find them stating, "Since webpack v4 the extract-text-webpack-plugin should not be used for css. Use mini-css-extract-plugin instead."
+
+Our configuration file requires some updates, a require statement, module rules, and a plugin declaration. Here's the updated file in full:
+
+**webpack.config.js**
+````js
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+
+const path = require('path');
+
+module.exports = {
+	mode: 'production',
+  entry: './src/index.js',
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'main.js'
+	},
+	
+	module: {
+		rules: [
+
+			{ 
+				test: /\.jsx?$/, 
+				loader: 'babel-loader',
+				include: /src/,
+				options: {
+					presets: ['env', 'react']
+				}
+			},
+
+			{
+        test: /\.css$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          "css-loader"
+        ]
+      }
+
+		]//rules
+	},//module
+
+	plugins: [
+
+		new HtmlWebpackPlugin({
+			title: 'My App',
+			template: 'src/index.html'
+		}),
+
+		new MiniCssExtractPlugin({
+      filename: "style.css"
+    })
+
+
+	]//plugins
+
+};
+````
+
+Running the build, you will now find a `style.css` file in your `dist` folder!
+
 ----
 
 ### Sources
+
+[Webpack Documentation](https://webpack.js.org/concepts/)
+
+[mini-css-extract-plugin on Github](https://github.com/webpack-contrib/mini-css-extract-plugin)
 
 [Webpack - A Detailed Introduction](https://www.smashingmagazine.com/2017/02/a-detailed-introduction-to-webpack/), by Joseph Zimmerman
 
