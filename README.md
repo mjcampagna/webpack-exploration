@@ -282,16 +282,14 @@ body {
 }
 ````
 
-Finally, because Webpack can have only a single entry point, we much reference our new CSS file within `index.js`. Weird, right?
-
-At the very top:
+Finally, because Webpack can have only a single entry point, we must reference our new CSS file within `index.js`. Weird, right? At the very top:
 
 **src/index.js**
 ````js
 import css from './style.css';
 ````
 
-Run your build, and your CSS should appear in the compiled `main.js` file. It works, but it's also lame. Because putting CSS into your JS is lame. LAME.
+Run your build, and your CSS should appear in the compiled `main.js` file. It works, but it's also lame. Because putting CSS into your JavaScript files is lame. LAME.
 
 To combat lameness, here we break from our first-party mission statement, and reach for a third-party solution. That solution is `mini-css-extract-plugin`.
 
@@ -299,7 +297,7 @@ To combat lameness, here we break from our first-party mission statement, and re
 
 In reading elsewhere, you may find references toward using `extract-text-webpack-plugin`, but visiting that module's Github page, you will find them stating, "Since webpack v4 the extract-text-webpack-plugin should not be used for css. Use mini-css-extract-plugin instead."
 
-Our configuration file requires some updates, a require statement, module rules, and a plugin declaration. Here's the updated file in full:
+Our configuration file requires some updates: a require statement, module rules, and a plugin declaration. Here's the updated file in full:
 
 **webpack.config.js**
 ````js
