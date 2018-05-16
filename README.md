@@ -196,7 +196,7 @@ module.exports = {
   plugins: [
 
     new HtmlWebpackPlugin({
-      title: 'My App Title',
+      title: 'My App',
       template: 'src/index.html'
     })
 
@@ -226,6 +226,10 @@ Now let's revist the empty `index.html` file we created at the top of the articl
   </body>
 </html>
 ````
+
+Note the strange enclosure in the HTML `<title>` element. This allows us to dynamically pull the app's name from the HtmlWebpackPlugin `title` option in our Webpack configuration file.
+
+It's also worth nothing that our HTML template does not explicitly include the script file. Don't worry! Webpack will add the script inclusions before closing the `body` element.
 
 ----
 
