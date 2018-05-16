@@ -1,0 +1,26 @@
+{
+  "name": "webpack-exploration",
+  "version": "1.0.0",
+  "description": "Exploring Webpack configuration",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prebuild": "del-cli dist -f",
+    "build": "webpack --production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mjcampagna/webpack-exploration.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mjcampagna/webpack-exploration/issues"
+  },
+  "homepage": "https://github.com/mjcampagna/webpack-exploration#readme",
+  "devDependencies": {
+    "del-cli": "^1.1.0",
+    "webpack": "^4.8.3",
+    "webpack-cli": "^2.1.3"
+  }
+}
