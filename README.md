@@ -252,25 +252,25 @@ Then update the rules in our module config.
 
 **webpack.config.js**
 ````js
-	module: {
-		rules: [
+  module: {
+    rules: [
 
-			{ 
-				test: /\.jsx?$/, 
-				loader: 'babel-loader',
-				include: /src/,
-				options: {
-					presets: ['env', 'react']
-				}
-			},
+      { 
+        test: /\.jsx?$/, 
+        loader: 'babel-loader',
+        include: /src/,
+        options: {
+          presets: ['env', 'react']
+        }
+      },
 
-			{
-				test: /\.css$/,
-				use: ['style-loader', 'css-loader']
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader']
       }
 
-		]//rules
-	},//module
+    ]//rules
+  },//module
 ````
 
 Create a `style.css` file in your `src` folder, and put something -- anything! -- inside of it. Here's something:
@@ -309,26 +309,26 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const path = require('path');
 
 module.exports = {
-	mode: 'production',
+  mode: 'production',
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'main.js'
-	},
-	
-	module: {
-		rules: [
+  },
+  
+  module: {
+    rules: [
 
-			{ 
-				test: /\.jsx?$/, 
-				loader: 'babel-loader',
-				include: /src/,
-				options: {
-					presets: ['env', 'react']
-				}
-			},
+      { 
+        test: /\.jsx?$/, 
+        loader: 'babel-loader',
+        include: /src/,
+        options: {
+          presets: ['env', 'react']
+        }
+      },
 
-			{
+      {
         test: /\.css$/,
         use: [
           MiniCssExtractPlugin.loader,
@@ -336,22 +336,22 @@ module.exports = {
         ]
       }
 
-		]//rules
-	},//module
+    ]//rules
+  },//module
 
-	plugins: [
+  plugins: [
 
-		new HtmlWebpackPlugin({
-			title: 'My App',
-			template: 'src/index.html'
-		}),
+    new HtmlWebpackPlugin({
+      title: 'My App',
+      template: 'src/index.html'
+    }),
 
-		new MiniCssExtractPlugin({
+    new MiniCssExtractPlugin({
       filename: "style.css"
     })
 
 
-	]//plugins
+  ]//plugins
 
 };
 ````
