@@ -24,7 +24,7 @@ Within the project folder, create a `src` folder, containing two files, `index.h
 node_modules
 src
   index.html
-	index.js
+  index.js
 package-lock.json
 package.json
 ````
