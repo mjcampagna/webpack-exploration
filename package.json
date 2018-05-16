@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "prebuild": "del-cli dist -f",
-    "build": "webpack --production"
+    "webpack": "webpack --production",
+    "build": "npm run prebuild -s && npm run webpack -s"
   },
   "repository": {
     "type": "git",
