@@ -131,6 +131,7 @@ module.exports = {
     ]//rules
   }//module
 };
+````
 
 Optionally, we might include React transpiling. In that case:
 
