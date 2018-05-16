@@ -37,6 +37,35 @@ dist/
 node_modules/
 ````
 
+By default, Webpack will create the `dist` folder when it runs, and dump its output there. But we might like to clean up the existing `dist` when building anew, so let's set that up.
+
+````
+$ npm install del-cli --save-dev
+````
+
+This allows the deletion of files and directories, and is useful in build scripts.
+
+Open the `package.json` file, and edit the "scripts" section.
+
+**package.json**
+````
+...
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prebuild": "del-cli dist -f",
+    "webpack": "webpack --production",
+    "build": "npm run prebuild -s && npm run webpack -s"
+  },
+````
+
+The `prebuild` will remove an existing `dist` folder, `webpack` will recreate it, and we'll use `build` to run both things at once, using:
+
+````npm run build````
+
+Go on, try it.
+
+----
+
 ----
 
 ### Sources
