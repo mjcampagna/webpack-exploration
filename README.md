@@ -14,7 +14,7 @@ You might be wondering, do we need another Webpack article? Maybe you don't, but
 
 This is a living document that I can update as Webpack and/or my needs continue to evolve, and I hope to avoid bloating my `package.json` or Webpack config with anything nonessential.
 
-And by writing this down, I hope to maintain a clarity of mind, and stave off the madness that has clearly embraced so many others.
+And by writing this down, I hope to maintain some clarity of mind, staving off the madness that has clearly embraced so many others.
 
 Let's get to it.
 
@@ -72,7 +72,7 @@ Open the `package.json` file, and edit the "scripts" section to match the follow
 
 The `prebuild` will remove an existing `dist` folder, `webpack` will recreate it, and we'll use `build` to run both things at once, using:
 
-````npm run build````
+````$ npm run build````
 
 Go on, try it. =D
 
@@ -104,7 +104,7 @@ Because it's 2018 and the newer ECMAScript is all the rage, you probably want to
 
 Install the following with npm.
 
-````npm install babel-core babel-loader babel-preset-env --save-dev````
+````$ npm install babel-core babel-loader babel-preset-env --save-dev````
 
 To use these, we'll need to grow our configuration file to include modules.
 
@@ -236,7 +236,7 @@ Now let's revist the empty `index.html` file we created at the top of the articl
 
 Note the strange enclosure in the HTML `<title>` element. This allows us to dynamically pull the app's name from the HtmlWebpackPlugin `title` option in our Webpack configuration file.
 
-It's also worth nothing that our HTML template does not explicitly include the script file. Don't worry! Webpack will add the script inclusions before the `body` element closes.
+It's also worth noting that our HTML template does not explicitly include the script file. Don't worry! Webpack will add the script inclusions before the `body` element closes.
 
 And finally, we are including a `link` element referencing a stylesheet that does not yet exist. That's next.
 
@@ -312,7 +312,7 @@ To combat lameness, here we break from our first-party mission statement, and re
 
 ````$ npm install mini-css-extract-plugin --save-dev````
 
-In reading elsewhere, you may find references toward using `extract-text-webpack-plugin`, but visiting that module's Github page, you will find them stating, "Since webpack v4 the extract-text-webpack-plugin should not be used for css. Use mini-css-extract-plugin instead."
+In reading elsewhere, you may find references toward using `extract-text-webpack-plugin`, but visiting that module's Github page, you will find them stating, "Since webpack v4 the extract-text-webpack-plugin should not be used for css. Use mini-css-extract-plugin instead." And so we shall.
 
 Our configuration file requires some updates: a require statement, module rules, and a plugin declaration. Here's the updated file in full:
 
@@ -375,6 +375,58 @@ Running the build, you will now find a `style.css` file in your `dist` folder!
 
 ----
 
+## Below, a work-in-progress ...
+
+The content below is likely to evolve, or may change entirely. I'm in the midst of writing it, so proceed at your own risk.
+
+## Handling Images
+
+We're well on our way through the swamp, but not out of the muck just yet. Images may appear in your HTML and/or CSS, and Webpack is still leaving them behind. Let's work on including them in our build.
+
+Create an `images` folder inside of `src`, and this is where you'll drop image files.
+
+````
+src
+  images
+````
+
+And we'll need two Webpack loaders, `file-loader` and `url-loader`.
+
+````$ npm install file-loader url-loader --save-dev````
+
+In your configuration file, update your module rules to include the below rule for images files, following the existing CSS rule.
+
+**webpack.config.js**
+````js
+...
+			{
+        test: /\.css$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          "css-loader"
+        ]
+      },
+
+			{
+        test: /\.(png|jpg|jpeg|gif)$/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+							limit: 8192,
+							name: 'images/[name].[ext]'
+            }
+          }
+				]
+			}
+
+		]//rules
+````
+
+
+
+----
+
 ## What's Next?!
 
 SASS, perhaps. Minification. Assets handling?
@@ -391,7 +443,7 @@ This document is still evolving, so I'll add to it as needed.
 
 [Webpack - A Detailed Introduction](https://www.smashingmagazine.com/2017/02/a-detailed-introduction-to-webpack/), by Joseph Zimmerman (out-of-date)
 
-
 [A tale of Webpack 4 and how to finally configure it in the right way](https://hackernoon.com/a-tale-of-webpack-4-and-how-to-finally-configure-it-in-the-right-way-4e94c8e7e5c1), by Margarita Obraztsova (informative, but a mess)
 
+[Handling Images](https://medium.com/a-beginners-guide-for-webpack-2/handling-images-e1a2a2c28f8d), by Bharat Tiwari
 ----
