@@ -399,7 +399,7 @@ In your configuration file, update your module rules to include the below rule f
 **webpack.config.js**
 ````js
 ...
-			{
+      {
         test: /\.css$/,
         use: [
           MiniCssExtractPlugin.loader,
@@ -407,20 +407,20 @@ In your configuration file, update your module rules to include the below rule f
         ]
       },
 
-			{
+      {
         test: /\.(png|jpg|jpeg|gif)$/,
         use: [
           {
             loader: 'url-loader',
             options: {
-							limit: 8192,
-							name: 'images/[name].[ext]'
+              limit: 8192,
+              name: 'images/[name].[ext]'
             }
           }
-				]
-			}
+        ]
+      }
 
-		]//rules
+    ]//rules
 ````
 
 
