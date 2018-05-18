@@ -10,6 +10,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: 'main.js'
 	},
+	watch: false,
 	
 	module: {
 		rules: [
@@ -38,7 +39,7 @@ module.exports = {
             loader: 'url-loader',
             options: {
 							limit: 8192,
-							name: 'images/[name].[ext]'
+							name: '[path]/[name].[ext]'
             }
           }
 				]

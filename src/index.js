@@ -1,3 +1,3 @@
 import css from './style.css';
 
-console.log('hi there');
+document.getElementById('app').innerHTML = '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus consequat justo diam, dapibus laoreet tortor scelerisque quis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean nec dui pharetra, efficitur dui et, accumsan metus. Ut sit amet velit consequat, efficitur lacus porta, rhoncus nunc. Nulla facilisi. Sed elementum, orci at semper vestibulum, risus lectus cursus sem, at finibus nibh sem et sapien. Sed pellentesque eleifend vehicula. Aliquam tincidunt finibus lobortis. Nam tortor dolor, maximus sit amet varius vitae, efficitur at purus. Nulla et sagittis nibh. Mauris ac eros tellus. Sed ut facilisis velit. Aliquam porttitor elementum eros eget viverra.</p>';

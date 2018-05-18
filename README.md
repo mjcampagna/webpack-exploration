@@ -2,7 +2,7 @@
 
 Through Webpack lies the path to madness. This I have gathered, reading various articles scattered like breadcrumbs amongst the Interwebs' tangles.
 
-Rather than follow those crumbs, I have decided to cut my own path. My hope is to create a base Webpack configuration, simple and straight-forward, hewing as closely as I can to those modules and plugins maintained by the Webpack Team themselves. In this way, I hope to minimize the wonkiness and hackiness that many articles seem to encourage in their configurations.
+Rather than follow those crumbs, I have decided to cut my own path. My hope is to create a base Webpack configuration, simply, and hewing as closely as I can to those modules and plugins maintained by the Webpack Team themselves. In this way, I hope to minimize the wonkiness and hackiness that many articles seem to encourage in their configurations.
 
 At time of writing, Webpack 4.8.3 is current.
 
@@ -10,11 +10,13 @@ This article assumes some familiarity with [Node.js](https://nodejs.org/) and np
 
 ## Wait. Why ... ?
 
-You might be wondering, do we need another Webpack article? Maybe you don't, but I do. Most articles I've found online are out-of-date, completely insane, or both. They steer the reader into brambles, then hand them band-aids to cover the wounds, usually in the form of third-party loaders and plugins that seem less like feature adds, and more like hacks.
+You might be wondering, do we need another Webpack article? Maybe you don't, but I do.
+
+I am new to Webpack, and it's been a struggle. Most articles I've read are out-of-date, or just completely insane, steering the reader into brambles, then handing them band-aids to cover the wounds, these being third-party loaders and plugins that seem less like feature adds, and more like hacks. Or they're just not in sync with the current version of Webpack, and they break.
 
 This is a living document that I can update as Webpack and/or my needs continue to evolve, and I hope to avoid bloating my `package.json` or Webpack config with anything nonessential.
 
-And by writing this down, I hope to maintain some clarity of mind, staving off the madness that has clearly embraced so many others.
+This article does not aim to be comprehensive. Instead, I hope to build a solid base and a sane introduction to Webpack. By writing things down, I hope to help myself and others to come to better grips with this challenging packager, and to stave off the madness that so many authors seem to encourage.
 
 Let's get to it.
 
@@ -65,7 +67,7 @@ Open the `package.json` file, and edit the "scripts" section to match the follow
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "prebuild": "del-cli dist -f",
-    "webpack": "webpack --production",
+    "webpack": "webpack",
     "build": "npm run prebuild -s && npm run webpack -s"
   },
 ````
@@ -95,10 +97,17 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: 'main.js'
   },
+  watch: false,
 };
 ````
 
 As written, this essentially mimics Webpack's default behavior. We'll sketch in more of the terrain as we travel forward. For details on what's here, see Webpack documentation for [Entry](https://webpack.js.org/concepts/#entry), [Output](https://webpack.js.org/concepts/#output) and [Mode](https://webpack.js.org/concepts/#mode). These are core concepts you'll want to understand.
+
+If you'd like Webpack to run automatically when you change files, set 'watch: true'.
+
+----
+
+## Bundling JS
 
 Because it's 2018 and the newer ECMAScript is all the rage, you probably want to include Babel, helpful for teaching the new slang to fogey browsers.
 
@@ -414,7 +423,7 @@ In your configuration file, update your module rules to include the below rule f
             loader: 'url-loader',
             options: {
               limit: 8192,
-              name: 'images/[name].[ext]'
+              name: '[path]/[name].[ext]'
             }
           }
         ]
@@ -423,7 +432,7 @@ In your configuration file, update your module rules to include the below rule f
     ]//rules
 ````
 
-
+`url-loader` will inline images smaller than the set limit as base64 strings; images larger than the limit will fall back to `file-loader` by default, and will be moved to `dist` folder in accordance with the 'name' option. As written above, we keep the existing file name, and drop the images into `dist/images`.
 
 ----
 
@@ -439,11 +448,16 @@ This document is still evolving, so I'll add to it as needed.
 
 [Webpack Documentation](https://webpack.js.org/concepts/) (essential)
 
+[Awesome Webpack](https://github.com/webpack-contrib/awesome-webpack), on Github
+
 [mini-css-extract-plugin on Github](https://github.com/webpack-contrib/mini-css-extract-plugin) (useful)
+
+[Survive JS - Webpack](https://survivejs.com/webpack/)
 
 [Webpack - A Detailed Introduction](https://www.smashingmagazine.com/2017/02/a-detailed-introduction-to-webpack/), by Joseph Zimmerman (out-of-date)
 
 [A tale of Webpack 4 and how to finally configure it in the right way](https://hackernoon.com/a-tale-of-webpack-4-and-how-to-finally-configure-it-in-the-right-way-4e94c8e7e5c1), by Margarita Obraztsova (informative, but a mess)
 
 [Handling Images](https://medium.com/a-beginners-guide-for-webpack-2/handling-images-e1a2a2c28f8d), by Bharat Tiwari
+
 ----
